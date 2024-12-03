@@ -175,13 +175,3 @@ exports.deleteService = async (req, res) => {
         res.status(500).json({ message: `Error occurred due to: ${error.message}` });
     }
 };
-
-
-
-
-
-
-
-
-
-

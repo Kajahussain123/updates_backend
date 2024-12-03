@@ -14,19 +14,13 @@ router.post('/add', jwtAuth, isAdmin, productController.createProduct);
 
 router.get('/products/:id', productController.getProductById);
 
-router.put('/brands/add/:productId', jwtAuth, isAdmin, productController.addBrands);
+router.patch('/brands/add/:productId', jwtAuth, isAdmin, productController.addBrands);
 
-router.put('/service/add/:productId', jwtAuth, isAdmin, productController.addServices);
+router.patch('/service/add/:productId', jwtAuth, isAdmin, productController.addServices);
 
 router.delete('/brand/delete/:productId', jwtAuth, isAdmin, productController.deleteBrand);
 
 router.delete('/service/delete/:productId', jwtAuth, isAdmin, productController.deleteService);
-
-
-
-
-
-
 
 
 
