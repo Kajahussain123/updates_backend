@@ -159,6 +159,46 @@ exports.addServices = async (req, res) => {
     }
 };
 
+// edit service
+exports.editServices = async (req, res) => {
+    const { productId } = req.params;
+    const { oldServiceName, newService } = req.body;
+
+    try {
+        // Find the product
+        const product = await productCollection.findById(productId);
+
+        if (!product) {
+            return res.status(404).json({ message: "Product not found" });
+        }
+
+        // Locate the index of the brand to be updated
+        const serviceIndex = product.services.findIndex(
+            brand => brand.serviceName === oldServiceName
+        );
+
+        if (serviceIndex === -1) {
+            return res.status(400).json({ message: "service not found" });
+        }
+
+        // Update the specific brand
+        product.services[serviceIndex].serviceName = newService.serviceName;
+
+        // Save the updated product
+        const updatedService = await product.save();
+
+        res.status(200).json({
+            message: "Service updated successfully",
+            updatedService
+        });
+    } catch (error) {
+        console.error("Error updating service:", error);
+        res.status(500).json({
+            message: `Error occurred while updating service: ${error.message}`
+        });
+    }
+};
+
 // delete brand 
 exports.deleteBrand = async (req, res) => {
     const { productId } = req.params;
