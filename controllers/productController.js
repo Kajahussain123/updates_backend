@@ -19,7 +19,7 @@ exports.createProduct = async (req, res) => {
 
         res.status(201).json({ message: 'Product created successfully', product: responseProduct });
     } catch (error) {
-        res.status(400).json({ error: error.message });
+        res.status(500).json({ error: error.message });
     }
 };
 
@@ -30,7 +30,7 @@ exports.getProductsAC = async (req, res) => {
             .select(`-createdAt -updatedAt`); // Fetch all products
         res.status(200).json(products);
     } catch (error) {
-        res.status(400).json({ error: error.message });
+        res.status(500).json({ error: error.message });
     }
 };
 
@@ -41,7 +41,7 @@ exports.getProductsCCTV = async (req, res) => {
             .select(`-createdAt -updatedAt`); // Fetch all products
         res.status(200).json(products);
     } catch (error) {
-        res.status(400).json({ error: error.message });
+        res.status(500).json({ error: error.message });
     }
 };
 // Get a product by ID
@@ -56,7 +56,7 @@ exports.getProductById = async (req, res) => {
 
         res.status(200).json(product);
     } catch (error) {
-        res.status(400).json({ error: error.message });
+        res.status(500).json({ error: error.message });
     }
 };
 
