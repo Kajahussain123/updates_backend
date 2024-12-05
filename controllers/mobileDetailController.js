@@ -4,7 +4,7 @@ const UserMobileDetails = require('../models/service');
 
 exports.addMobileDetails = async (req, res) => {
     try {
-        const { model_name, company_name, name, mobileNumber, houseName, state, district, pincode } = req.body;
+        const { model_name, company_name,description, name, mobileNumber, houseName, state, district, pincode } = req.body;
         const mobile_img = req.file.path;
 
         if (!model_name || !company_name || !mobile_img) {
@@ -17,6 +17,7 @@ exports.addMobileDetails = async (req, res) => {
         const newMobileDetails = new mobile_dts({
             model_name,
             company_name,
+            description,
             mobile_img
         });
 
