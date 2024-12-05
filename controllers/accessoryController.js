@@ -146,60 +146,58 @@ exports.deleteAccessory = async (req, res) => {
     }
 };
 
-exports.addorderAccesory=async(req,res)=>{
+/* exports.addorderAccesory=async(req,res)=>{
 
-}
+} */
 
 // validating user
 const validateUserDetails = (userData) => {
-    const { name, mobileNumber, houseName, state, district, pincode } = userData;
+    const { phone_number, customerName } = userData;
     
-    if (!name || name.trim() === '') {
+    if (!customerName || customerName.trim() === '') {
         return 'Name is required.';
     }
-    if (!mobileNumber || !/^\d{10}$/.test(mobileNumber)) {
+    if (!phone_number || !/^\d{10}$/.test(phone_number)) {
         return 'Mobile number must be a valid 10-digit number.';
     }
-    if (!houseName || houseName.trim() === '') {
-        return 'House name is required.';
-    }
-    if (!state || state.trim() === '') {
-        return 'State is required.';
-    }
-    if (!district || district.trim() === '') {
-        return 'District is required.';
-    }
-    if (!pincode || !/^\d{6}$/.test(pincode)) {
-        return 'Pincode must be a valid 6-digit number.';
-    }
+    // if (!houseName || houseName.trim() === '') {
+    //     return 'House name is required.';
+    // }
+    // if (!state || state.trim() === '') {
+    //     return 'State is required.';
+    // }
+    // if (!district || district.trim() === '') {
+    //     return 'District is required.';
+    // }
+    // if (!pincode || !/^\d{6}$/.test(pincode)) {
+    //     return 'Pincode must be a valid 6-digit number.';
+    // }
     return null;
 };
 
 
 exports.addorderDetails = async (req, res) => {
     const { id } = req.params;
-    const { name, mobileNumber, houseName, state, district, pincode } = req.body;
-
-    
-    const userError = validateUserDetails({ name, mobileNumber, houseName, state, district, pincode });
+    const { phone_number, customerName } = req.body;
+    const userError = validateUserDetails({ customerName, phone_number });
     if (userError) {
         return res.status(400).json({ error: userError });
     }
-
-    
-    const newUser = new user_dts({ name, mobileNumber, houseName, state, district, pincode });
+    /* const newUser = new user_dts({ customerName, phone_number });
 
     try {
         await newUser.save(); 
     } catch (error) {
         console.error('Error saving user:', error);
         return res.status(500).json({ error: 'Failed to create user.' });
-    }
+    } */
 
     // Create order details
     const orderDetails = new order_Model({
+        customerName,
+        phone_number,
         accessoryId: id,
-        userId: newUser._id,
+        
     });
 
     try {
@@ -211,7 +209,7 @@ exports.addorderDetails = async (req, res) => {
 
    
     return res.status(201).json({  
-        user: newUser,
+        /* user: newUser, */
         orderSummary: orderDetails
     });
 };
@@ -220,9 +218,7 @@ exports.addorderDetails = async (req, res) => {
 exports.getOrderDetails = async (req, res) => {
     try {
       
-        const allorderDetails = await order_Model.find()
-            .populate('userId')       
-            .populate('accessoryId')    
+        const allorderDetails = await order_Model.find().populate('accessoryId')    
 
         if (!allorderDetails || allorderDetails.length === 0) {
             return res.status(404).json({ message: 'No service details found' });
