@@ -9,6 +9,7 @@ const mobileDetailsSchema = new mongoose.Schema({
         type: String,
         required: true, 
     },
+    description:{type:String},
     mobile_img: {
         type: String,
     },

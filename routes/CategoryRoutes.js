@@ -6,7 +6,7 @@ const { jwtAuth, isAdmin } = require('../middleware/authMiddleware');
 // add category
 router.post('/add',jwtAuth,isAdmin,categoryController.addCategory);
 router.get('/view',categoryController.getCategories)
-router.put('/update/:id',jwtAuth,isAdmin,categoryController.updateCategory)
+router.patch('/update/:id',jwtAuth,isAdmin,categoryController.updateCategory)
 router.delete('/delete/:id',jwtAuth,isAdmin,categoryController.deleteCategory)
 
 

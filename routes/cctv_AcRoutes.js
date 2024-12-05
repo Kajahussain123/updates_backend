@@ -11,7 +11,7 @@ router.post('/users/cctv-add', cctvController.addcctvDetails)
 
 router.post('/users/ac-add', cctvController.addACDetails)
 
-router.put('/service/status/:id', jwtAuth, isAdmin, cctvController.updateService)
+router.patch('/service/status/:id', jwtAuth, isAdmin, cctvController.updateService)
 
 router.delete('/delete/service/:id', jwtAuth, isAdmin, cctvController.deleteService)
 

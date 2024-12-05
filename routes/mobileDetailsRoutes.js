@@ -9,7 +9,7 @@ router.post('/service/add', multerconfigure.single('mobile_img'), mobileDetailCo
 
 router.get('/service/get', jwtAuth, isAdmin, mobileDetailController.getMobileDetails)
 
-router.put('/update/status/:id', jwtAuth, isAdmin, mobileDetailController.updateMobileService)
+router.patch('/update/status/:id', jwtAuth, isAdmin, mobileDetailController.updateMobileService)
 
 router.delete('/delete/service/:id', jwtAuth, isAdmin, mobileDetailController.deleteMobileService)
 
