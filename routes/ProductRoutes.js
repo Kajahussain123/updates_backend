@@ -20,6 +20,8 @@ router.patch('/brands/edit/:productId', jwtAuth, isAdmin, productController.edit
 
 router.patch('/service/add/:productId', jwtAuth, isAdmin, productController.addServices);
 
+router.patch('/service/edit/:productId', jwtAuth, isAdmin, productController.editServices);
+
 router.delete('/brand/delete/:productId', jwtAuth, isAdmin, productController.deleteBrand);
 
 router.delete('/service/delete/:productId', jwtAuth, isAdmin, productController.deleteService);
