@@ -6,6 +6,7 @@ const productDetails = require('./routes/ProductRoutes.js')
 const accessoryDetails=require('./routes/accessoryRoutes.js')
 const categoryDetails=require('./routes/CategoryRoutes.js')
 const adminDetails=require('./routes/adminRoutes.js')
+const testimonails=require('./routes/TestimonialRoute.js')
 
 const cors = require('cors');
 require('dotenv').config();
@@ -25,6 +26,7 @@ app.use(express.json());
 app.use('/admin',adminDetails)
 app.use('/category',categoryDetails)
 app.use('/product-details', productDetails);
+app.use('/testimonials', testimonails);
 
 
 // // User Routes
