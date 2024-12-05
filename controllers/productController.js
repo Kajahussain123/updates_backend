@@ -89,6 +89,47 @@ exports.addBrands = async (req, res) => {
     }
 };
 
+// edit brands
+exports.editBrands = async (req, res) => {
+    const { productId } = req.params;
+    const { oldBrandName, newBrand } = req.body;
+
+    try {
+        // Find the product
+        const product = await productCollection.findById(productId);
+
+        if (!product) {
+            return res.status(404).json({ message: "Product not found" });
+        }
+
+        // Locate the index of the brand to be updated
+        const brandIndex = product.brands.findIndex(
+            brand => brand.brandName === oldBrandName
+        );
+
+        if (brandIndex === -1) {
+            return res.status(400).json({ message: "Brand not found" });
+        }
+
+        // Update the specific brand
+        product.brands[brandIndex].brandName = newBrand.brandName;
+
+        // Save the updated product
+        const updatedProduct = await product.save();
+
+        res.status(200).json({
+            message: "Brand updated successfully",
+            updatedProduct
+        });
+    } catch (error) {
+        console.error("Error updating brand:", error);
+        res.status(500).json({
+            message: `Error occurred while updating brand: ${error.message}`
+        });
+    }
+};
+
+
 
 
 // add services

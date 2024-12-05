@@ -44,16 +44,17 @@ try {
 }
 }
 
-exports.deleteTestimonials=async(req,res)=>{
-    const {id}=req.params
+exports.deleteTestimonials = async (req, res) => {
+    const { id } = req.params;
     try {
-        const deletedTestimonial=await Testimonials.findByIdAndDelete(id)
-        if(!deletedTestimonial){
-            res.status(400).json('testimonial doesnt exist')
+        const deletedTestimonial = await Testimonials.findByIdAndDelete(id);
+        if (!deletedTestimonial) {
+            return res.status(400).json({ message: 'Testimonial doesn\'t exist' });
         }
-        res.status(200).json({message:'Testimonial Deleted Successfully'})
+        res.status(200).json({ message: 'Testimonial Deleted Successfully' });
     } catch (error) {
-        res.status(500).json({message:'internal server error',error})
+        res.status(500).json({ message: 'Internal Server Error', error });
     }
-}
+};
+
 
