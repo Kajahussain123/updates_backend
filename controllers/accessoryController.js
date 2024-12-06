@@ -1,7 +1,7 @@
 const accessoryDetails = require('../models/accessoryModel');
 const order_Model=require('../models/accessoryOrderModel')
 const user_dts = require('../models/User');
-const mobileServiceModel = require('../models/mobileDetails');
+const mobileServiceModel = require('../models/service');
 const Ac_CctvService = require('../models/Ac_CctvService');
 const Ac_CctvDetailsSchema = require('../models/Ac_CctvService'); 
 
@@ -138,9 +138,12 @@ exports.deleteAccessoryImage = async (req, res) => {
 exports.deleteAccessory = async (req, res) => {
     try {
         const { id } = req.params
-        const deletedAccessory = await accessoryDetails.findByIdAndUpdate({_id:id})
+        const deletedAccessory = await accessoryDetails.findByIdAndDelete({_id:id})
             .select(`-createdAt -updatedAt`);
-        res.status(200).json(deletedAccessory);
+            if(!deletedAccessory){
+                return res.status(400).json('Accessory doesnt exist')
+            }
+        res.status(200).json({message:'Accessory deleted successfully'});
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
