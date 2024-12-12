@@ -102,7 +102,7 @@ exports.getMobileDetails = async (req, res) => {
         const allMobileDetails = await UserMobileDetails.find()
             .populate('userId', `-createdAt -updatedAt`)
             .populate('mobileId', `-createdAt -updatedAt`)
-            .select(`-createdAt -updatedAt`)
+            
 
         if (!allMobileDetails || allMobileDetails.length === 0) {
             return res.status(404).json({ message: 'No mobile details found' });

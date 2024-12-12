@@ -35,7 +35,7 @@ exports.addAccessory = async (req, res) => {
 exports.getAccessory = async (req, res) => {
     try {
         const allAccessory = await accessoryDetails.find()
-        .select(`-createdAt -updatedAt`);
+       
         res.status(200).json(allAccessory);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -47,7 +47,7 @@ exports.getViewAccessory = async (req, res) => {
     try {
         const { id } = req.params
         const viewAccessory = await accessoryDetails.findById(id)
-            .select(`-createdAt -updatedAt`);
+           
         res.status(200).json(viewAccessory);
     } catch (error) {
         res.status(500).json({ error: error.message });

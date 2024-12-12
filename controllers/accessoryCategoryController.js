@@ -22,7 +22,7 @@ exports.addCategory = async (req, res) => {
 exports.getCategories = async (req, res) => {
     try {
         const allCategories = await category_model.find()
-            .select(`-createdAt -updatedAt`);
+            
         res.status(200).json(allCategories);
     } catch (error) {
         res.status(500).json({ error: error.message });

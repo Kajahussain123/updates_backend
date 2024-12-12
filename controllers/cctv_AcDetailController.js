@@ -109,7 +109,7 @@ exports.getAc_CctvDetails = async (req, res) => {
         const allserviceDetails = await Ac_CctvDetailsSchema.find()
             .populate({ path: `userId`, select: '-_id -createdAt -updatedAt -__v' })
             .populate({ path: 'Ac_cctvId', select: '-_id -createdAt -updatedAt -__v' })
-            .select(`-createdAt -updatedAt -__v`)
+            
 
         if (!allserviceDetails || allserviceDetails.length === 0) {
             return res.status(404).json({ message: 'No service details found' });
