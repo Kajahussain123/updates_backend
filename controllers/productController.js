@@ -27,7 +27,7 @@ exports.createProduct = async (req, res) => {
 exports.getProductsAC = async (req, res) => {
     try {
         const products = await productCollection.find({ productName: 'AC' })
-            .select(`-createdAt -updatedAt`); // Fetch all products
+           
         res.status(200).json(products);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -38,7 +38,7 @@ exports.getProductsAC = async (req, res) => {
 exports.getProductsCCTV = async (req, res) => {
     try {
         const products = await productCollection.find({ productName: 'CCTV' })
-            .select(`-createdAt -updatedAt`); // Fetch all products
+            
         res.status(200).json(products);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -48,7 +48,7 @@ exports.getProductsCCTV = async (req, res) => {
 exports.getProductById = async (req, res) => {
     try {
         const product = await productCollection.findById(req.params.id)
-            .select(`-createdAt -updatedAt `);
+           
 
         if (!product) {
             return res.status(404).json({ message: 'Product not found' });
