@@ -104,9 +104,7 @@ exports.getMobileDetails = async (req, res) => {
             .populate('mobileId', `-createdAt -updatedAt`)
             
 
-        if (!allMobileDetails || allMobileDetails.length === 0) {
-            return res.status(404).json({ message: 'No mobile details found' });
-        }
+       
 
         return res.status(200).json(allMobileDetails);
     } catch (error) {
