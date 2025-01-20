@@ -23,16 +23,16 @@ app.use(express.json());
 
 //  Admin Routes 
 // app.use('/users', UserRoutes);
-app.use('/admin',adminDetails)
-app.use('/category',categoryDetails)
-app.use('/product-details', productDetails);
-app.use('/testimonials', testimonails);
+app.use('/api/admin',adminDetails)
+app.use('/api/category',categoryDetails)
+app.use('/api/product-details', productDetails);
+app.use('/api/testimonials', testimonails);
 
 
 // // User Routes
-app.use('/mobile',mobileDetails)
-app.use('/CCTV-AC', cctvDetails);
-app.use('/accessory',accessoryDetails)
+app.use('/api/mobile',mobileDetails)
+app.use('/api/CCTV-AC', cctvDetails);
+app.use('/api/accessory',accessoryDetails)
 
 // using upload folder that contain images
 app.use('/uploads',express.static('./uploads'))
